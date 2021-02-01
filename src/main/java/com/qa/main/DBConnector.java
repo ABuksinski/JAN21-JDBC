@@ -21,7 +21,7 @@ public class DBConnector {
 	 
 	// CREATE
 	public void createPerson(String first, String last) throws SQLException {
-//		String sql = "INSERT INTO Customer (`firstname`,`surname`) VALUES" + "('" + first + "','" + last + "');";
+		//String sql = "INSERT INTO Customer (`firstname`,`surname`) VALUES" + "('" + first + "','" + last + "');";
 		String sql = String.format("INSERT INTO Customer(`firstname`,`surname`) VALUES ('%s', '%s');", first,last);
 		stmt.executeUpdate(sql);
 	}
@@ -32,7 +32,7 @@ public class DBConnector {
 		ResultSet rs = stmt.executeQuery(sql);
 			
 		while(rs.next()) {
-//			System.out.println(rs.getString("firstname") + " " + rs.getString("surname"));
+			//System.out.println(rs.getString("firstname") + " " + rs.getString("surname"));
 			System.out.println(String.format("ID = '%d', Fname: '%s', LName: '%s'",rs.getInt("custID"), rs.getString("firstname"), rs.getString("surname") ));
 		}
 	}
@@ -40,7 +40,6 @@ public class DBConnector {
 	// READ ONE
 	public void readSingle(int id) {
 		String sql = "SELECT * FROM Customer WHERE custID=" + id; 
-		
 	}
 	
 	// UPDATE
@@ -56,5 +55,9 @@ public class DBConnector {
 		stmt.executeUpdate(sql);
 	}
 	
+	
+	public void close() throws SQLException { 
+		conn.close(); 
+	}
 	
 }
